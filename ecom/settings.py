@@ -38,7 +38,10 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-]
+    "accounts",
+    'rest_framework', 
+    'drf_spectacular',
+    ]
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -126,3 +129,18 @@ STATIC_URL = "static/"
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+AUTH_USER_MODEL = 'accounts.User'
+
+# DRF settings
+REST_FRAMEWORK = {
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+}
+
+# Spectacular settings (for OpenAPI generation)
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'Ecom API',
+    'DESCRIPTION': 'API documentation for the Ecom project',
+    'VERSION': '1.0.0',
+    'SERVE_INCLUDE_SCHEMA': False,  
+}
+
