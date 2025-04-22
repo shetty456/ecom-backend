@@ -1,4 +1,4 @@
-.PHONY: up down logs makemigrations migrate shell lint format runserver runserver-local
+.PHONY: up down logs makemigrations migrate shell lint format runserver runserver-local freeze test
 
 up:
 	docker compose up --build
@@ -29,3 +29,11 @@ runserver:
 
 runserver-local:
 	python manage.py runserver
+
+freeze:
+	pip freeze > requirements.txt
+
+test: up
+	docker compose exec web python manage.py makemigrations
+	docker compose exec web python manage.py migrate --noinput
+	docker compose exec web python manage.py test
